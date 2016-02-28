@@ -82,6 +82,7 @@ function init() {
                  if (cb) {
                      cb(status,err);
                  }
+                 window.alert("Load feed " + feedName + " ended with error:" + err);
                },
        dataType: "json"
      });

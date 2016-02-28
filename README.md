@@ -97,49 +97,39 @@ You will learn how to use Jasmine to write a number of tests against a pre-exist
 
 13. Write a test that ensures when a new feed is loaded by the loadFeed function that the content actually changes. Remember, loadFeed() is asynchronous.
 
-    /* before each test  loadfeed(0)
-    */
-    beforeEach(function(done) {
-      loadFeed(0, function(status, err) {
-        if ( status === "success") {
-          $html0 = $container.children(".entry-link").first().children(".entry").first().html();
-          done();
-        } else {
-          done.fail(status + ">fail to load feed 0 with error: " + err);
-        }
-        });    
-    });
+        beforeEach(function(done) {
+            /* before each test  loadfeed(0) */
+            loadFeed(0, function(status, err) {
+                if ( status === "success") {
+                    $html0 = $container.children(".entry-link").first().children(".entry").first().html();
+                    done();
+                } else  done.fail(status + ">fail to load feed 0 with error: " + err);
+            });    
+        });
 
-    /* if loadfeed(1) is sucessfull , compare the content of feed 0 and feed 1, they should be different */
+        /* if loadfeed(1) is sucessfull , compare the content of feed 0 and feed 1, they should be different */
 
-    it('content should change when a feed 1 is loaded', function(done) {
-      loadFeed(1, function(status, err) {
-        if (status === "success") {
-          $html1 = $container.children(".entry-link").first().children(".entry").first().html();
-          expect($html1).not.toEqual($html0);
-          done();
-        } else {
-          done.fail(status + ">fail to load feed 1  with error: " + err);
-        }
-      });     
-    });
+        it('content should change when a feed 1 is loaded', function(done) {
+         loadFeed(1, function(status, err) {
+            if (status === "success") {
+                $html1 = $container.children(".entry-link").first().children(".entry").first().html();
+                expect($html1).not.toEqual($html0);
+                done();
+             } else done.fail(status + ">fail to load feed 1  with error: " + err);
+            });     
+        });
 
     /* if loadfeed(2) is sucessfull , compare the content of feed 0 and feed 2, they should be different */
 
     it('content should change when a feed 2 is loaded', function(done) {
-      loadFeed(2, function(status, err) {
-        if (status === "success") {
-          $html2 = $container.children(".entry-link").first().children(".entry").first().html();   
-          expect($html2).not.toEqual($html0);
-          done();
-        } else {
-          done.fail(status + ">fail to load feed 2 with error:" + err);
-        }
+        loadFeed(2, function(status, err) {
+            if (status === "success") {
+                $html2 = $container.children(".entry-link").first().children(".entry").first().html();   
+                expect($html2).not.toEqual($html0);
+                done();
+            } else done.fail(status + ">fail to load feed 2 with error:" + err);
       });    
     });
-
-
-
 
 14. When complete - all of your tests should pass.
         
