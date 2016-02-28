@@ -29,11 +29,117 @@ You will learn how to use Jasmine to write a number of tests against a pre-exist
 4. Explore the Jasmine spec file in *./jasmine/spec/feedreader.js*
 5. Edit the allFeeds variable in *./js/app.js* to make the provided test fail and see how Jasmine visualizes this failure in your application.
 6. Return the allFeeds variable to a passing state.
+
+
 7. Write a test that loops through each feed in the allFeeds object and ensures it has a URL defined and that the URL is not empty.
+
+ 		it('do not have empty url',function() {
+            allFeeds.forEach( function(feed){
+                expect(feed.url).toBeDefined();
+                expect(feed.url.length).not.toEqual(0);
+            });
+         });
+
 8. Write a test that loops through each feed in the allFeeds object and ensures it has a name defined and that the name is not empty.
+
+		it('do not have empty name',function() {
+            allFeeds.forEach( function(feed){
+                expect(feed.name).toBeDefined();
+                expect(feed.name.length).not.toEqual(0);
+            });
+         });
+
+
 9. Write a new test suite named "The menu".
 10. Write a test that ensures the menu element is hidden by default. You'll have to analyze the HTML and the CSS to determine how we're performing the hiding/showing of the menu element.
 11. Write a test that ensures the menu changes visibility when the menu icon is clicked. This test should have two expectations: does the menu display when clicked and does it hide when clicked again.
+
+		it('is hidden by default',function(){
+            expect($body.hasClass('menu-hidden')).toBeTruthy();
+        });   
+        it('is displayed when the menu icon is clicked',function(){
+            /* simulate a click */
+            $menuIcon.trigger("click");
+            expect($body.hasClass('menu-hidden')).toBeFalsy();
+        });
+        it('is hidden when the menu icon is clicked again ',function(){
+            $menuIcon.trigger("click");
+            expect($body.hasClass('menu-hidden')).toBeTruthy();
+
+        });
+
+
 12. Write a test that ensures when the loadFeed function is called and completes its work, there is at least a single .entry element within the .feed container. Remember, loadFeed() is asynchronous so this test wil require the use of Jasmine's beforeEach and asynchronous done() function.
+
+		beforeEach(function(done) {
+            loadFeed(0, function(status, err) {
+                if (status === "success") {
+                 $entry_links = $container.children(".entry-link");
+                    done();
+                } else done.fail(status + ">fail to load feed 0 with error: " + err);
+            });     
+        });
+
+        /* ensure that the container contain at least one entry */
+        it("there is at least a single .entry within the .feed container", function(done) {
+            var $entry = $entry_links.first().children(".entry").first();
+            expect($entry).toBeDefined();
+            done();
+        });
+
+        /* ensure that every feed entry has a non empty url  */
+        it("each feed entry must have a href attribute", function(done) {
+            .each($entry_links, function(index, entry_link) {
+             expect($(entry_link).attr('href').length).not.toEqual(0);
+            });
+         done();
+         });
+
 13. Write a test that ensures when a new feed is loaded by the loadFeed function that the content actually changes. Remember, loadFeed() is asynchronous.
+
+    /* before each test  loadfeed(0)
+    */
+    beforeEach(function(done) {
+      loadFeed(0, function(status, err) {
+        if ( status === "success") {
+          $html0 = $container.children(".entry-link").first().children(".entry").first().html();
+          done();
+        } else {
+          done.fail(status + ">fail to load feed 0 with error: " + err);
+        }
+        });    
+    });
+
+    /* if loadfeed(1) is sucessfull , compare the content of feed 0 and feed 1, they should be different */
+
+    it('content should change when a feed 1 is loaded', function(done) {
+      loadFeed(1, function(status, err) {
+        if (status === "success") {
+          $html1 = $container.children(".entry-link").first().children(".entry").first().html();
+          expect($html1).not.toEqual($html0);
+          done();
+        } else {
+          done.fail(status + ">fail to load feed 1  with error: " + err);
+        }
+      });     
+    });
+
+    /* if loadfeed(2) is sucessfull , compare the content of feed 0 and feed 2, they should be different */
+
+    it('content should change when a feed 2 is loaded', function(done) {
+      loadFeed(2, function(status, err) {
+        if (status === "success") {
+          $html2 = $container.children(".entry-link").first().children(".entry").first().html();   
+          expect($html2).not.toEqual($html0);
+          done();
+        } else {
+          done.fail(status + ">fail to load feed 2 with error:" + err);
+        }
+      });    
+    });
+
+
+
+
 14. When complete - all of your tests should pass.
+        

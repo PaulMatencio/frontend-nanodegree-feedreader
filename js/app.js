@@ -7,6 +7,7 @@
  */
 
 // The names and URLs to all of the feeds we'd like available.
+
 var allFeeds = [
     {
         name: 'Udacity Blog',
@@ -22,6 +23,7 @@ var allFeeds = [
         url: 'http://feeds.feedburner.com/udacity-linear-digressions'
     }
 ];
+
 
 /* This function starts up our application. The Google Feed
  * Reader API is loaded asynchonously and will then call this
@@ -39,6 +41,8 @@ function init() {
  * index position within the allFeeds array.
  * This function all supports a callback as the second parameter
  * which will be called after everything has run successfully.
+ *  
+ * Add  two paramters (status and err)  to  the callback, thus it can be used by the tests to check the status  
  */
  function loadFeed(id, cb) {
      var feedUrl = allFeeds[id].url,
@@ -70,13 +74,13 @@ function init() {
                  });
 
                  if (cb) {
-                     cb();
+                     cb(status,null); // err = null
                  }
                },
        error: function (result, status, err){
                  //run only the callback without attempting to parse result due to error
                  if (cb) {
-                     cb();
+                     cb(status,err);
                  }
                },
        dataType: "json"
