@@ -110,26 +110,26 @@ You will learn how to use Jasmine to write a number of tests against a pre-exist
         /* if loadfeed(1) is sucessfull , compare the content of feed 0 and feed 1, they should be different */
 
         it('content should change when a feed 1 is loaded', function(done) {
-         loadFeed(1, function(status, err) {
-            if (status === "success") {
-                $html1 = $container.children(".entry-link").first().children(".entry").first().html();
-                expect($html1).not.toEqual($html0);
-                done();
-             } else done.fail(status + ">fail to load feed 1  with error: " + err);
+            loadFeed(1, function(status, err) {
+                if (status === "success") {
+                    $html1 = $container.children(".entry-link").first().children(".entry").first().html();
+                    expect($html1).not.toEqual($html0);
+                    done();
+                } else done.fail(status + ">fail to load feed 1  with error: " + err);
             });     
         });
 
-    /* if loadfeed(2) is sucessfull , compare the content of feed 0 and feed 2, they should be different */
+        /* if loadfeed(2) is sucessfull , compare the content of feed 0 and feed 2, they should be different */
 
-    it('content should change when a feed 2 is loaded', function(done) {
-        loadFeed(2, function(status, err) {
-            if (status === "success") {
-                $html2 = $container.children(".entry-link").first().children(".entry").first().html();   
-                expect($html2).not.toEqual($html0);
-                done();
-            } else done.fail(status + ">fail to load feed 2 with error:" + err);
-      });    
-    });
+        it('content should change when a feed 2 is loaded', function(done) {
+            loadFeed(2, function(status, err) {
+                if (status === "success") {
+                    $html2 = $container.children(".entry-link").first().children(".entry").first().html();   
+                    expect($html2).not.toEqual($html0);
+                    done();
+                } else done.fail(status + ">fail to load feed 2 with error:" + err);
+            });    
+        });
 
 14. When complete - all of your tests should pass.
         
