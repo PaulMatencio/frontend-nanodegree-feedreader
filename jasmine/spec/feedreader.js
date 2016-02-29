@@ -42,10 +42,10 @@ $(function() {
   });
 
 
-  /* Test suite named "The menu" 
-  * Ensures the menu changes visibility when the menu icon is clicked. The first click 
-  * should display the menu and the second click shoud hide the menu
-  */
+  /* Test suite named "The menu"
+   * Ensures the menu changes visibility when the menu icon is clicked. The first click
+   * should display the menu and the second click shoud hide the menu
+   */
   describe("The menu", function() {
     var $body,
       $menuIcon;
@@ -58,7 +58,7 @@ $(function() {
     it('is hidden by default', function() {
       expect($body.hasClass('menu-hidden')).toBeTruthy();
     });
-    /* Ensures the menu changes visibility when the menu icon is clicked. The first click 
+    /* Ensures the menu changes visibility when the menu icon is clicked. The first click
      * should display the menu and the second click shoud hide the menu
      */
     it('is displayed when the menu icon is clicked', function() {
@@ -66,7 +66,7 @@ $(function() {
       $menuIcon.trigger("click");
       expect($body.hasClass('menu-hidden')).toBeFalsy();
     });
-      /* simulate a second click, the menu should be hidden */
+    /* simulate a second click, the menu should be hidden */
     it('is hidden when the menu icon is clicked again ', function() {
       $menuIcon.trigger("click");
       expect($body.hasClass('menu-hidden')).toBeTruthy();
@@ -88,7 +88,7 @@ $(function() {
 
     /*
         When loadFeed is called and completed, ensure the container contain at least entry
-        (first or last) 
+        (first or last)
     */
     describe("When loadFeed is called ....", function() {
 
@@ -100,13 +100,13 @@ $(function() {
             $entry_links = $container.children(".entry-link");
             done();
           } else done.fail(status + ">fail to load feed 0 with error: " + err);
-        });     
+        });
       });
 
       /* ensure the container contain at least one entry */
       it("there is at least a single .entry within the .feed container", function(done) {
-        // var $entry = $entry_links.first().children(".entry").first();  
-        expect($('feed .entry')).toBeDefined();
+        // var $entry = $entry_links.first().children(".entry").first();
+        expect($('.feed .entry')).toBeDefined();
         done();
       });
 
@@ -120,7 +120,7 @@ $(function() {
   });
 
 
-  /* before each test  loadfeed(0)   
+  /* before each test  loadfeed(0)
     if loadfeed(1) is sucessfull , compare the content of feed 0 and feed 1, they should be different
     if loadfeed(2) is sucessfull , compare the content of feed 0 and feed 2, they should be different
   */
@@ -129,53 +129,77 @@ $(function() {
     var $html0, $html1, $html2;
     var $container = $('.feed');
     /* before each test  loadfeed(0)
-    */
+     */
     beforeEach(function(done) {
       loadFeed(0, function(status, err) {
-        if ( status === "success") {
-          $html0 = $container.children(".entry-link").first().children(".entry").first().html();
+        if (status === "success") {
+          //  $html0 = $container.children(".entry-link").first().children(".entry").first().html();
+          $html0 = $('.feed .entry').first().html();
           done();
         } else {
           done.fail(status + ">fail to load feed 0 with error: " + err);
         }
-      });    
+      });
     });
     /* if loadfeed(1) is sucessfull , compare the content of feed 0 and feed 1, they should be different */
     it('content should change when a feed 1 is loaded', function(done) {
       loadFeed(1, function(status, err) {
         if (status === "success") {
-          $html1 = $container.children(".entry-link").first().children(".entry").first().html();
+          // $html1 = $container.children(".entry-link").first().children(".entry").first().html();
+          $html1 = $('.feed .entry').first().html();
           expect($html1).not.toEqual($html0);
           done();
         } else {
           done.fail(status + ">fail to load feed 1  with error: " + err);
         }
-      });     
+      });
     });
     /* if loadfeed(2) is sucessfull , compare the content of feed 0 and feed 2, they should be different */
     it('content should change when a feed 2 is loaded', function(done) {
       loadFeed(2, function(status, err) {
         if (status === "success") {
-          $html2 = $container.children(".entry-link").first().children(".entry").first().html();   
+          // $html2 = $container.children(".entry-link").first().children(".entry").first().html();
+          $html2 = $('.feed .entry').first().html();
           expect($html2).not.toEqual($html0);
           done();
         } else {
           done.fail(status + ">fail to load feed 2 with error:" + err);
         }
-      });    
+      });
     });
 
   });
-  
-  // disabling findfeed with xdescribe
-  xdescribe("findFeeds specification",function() {
-    var query;
+
+  /* add asynchonously a new feed  */
+  describe("add a new feed", function() {
+    var numfeeds;
+    /* simulate an async function */
+    beforeEach(function(done) {
+      setTimeout(function() {
+        numfeeds = numberFeeds; // allFeeds.length
+        done();
+      }, 1);
+
+    });
+    /* expect + 1 to the number of feeds */
+    it("should have one more feed", function(done) {
+      $('.add-feed').trigger("click");
+      expect(numberFeeds - numfeeds).toEqual(1);
+      done();
+    });
+  });
+
+  describe("remove a feed", function() {
+    var numfeeds;
     beforeEach(function() {
-      query = "";
+      numfeeds = numberFeeds; // allFeeds.length
     });
 
-    it("is just a function, so it can contain any code", function() {
-      expect(query.length).toEqual(0);
+    /* expect - 1 to the number of feeds */
+    it("should have one less  feed", function() {
+      var button = $('.feed-list li button').first();
+      button.trigger("click");
+      expect(numfeeds - numberFeeds).toEqual(1);
     });
   });
 
