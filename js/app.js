@@ -56,7 +56,7 @@ function init() {
        success: function (result, status){
 
                  var container = $('.feed'),
-                     title = $('.header-title'),
+                     title = $('.header-title'), 
                      entries = result.feed.entries,
                      entriesLen = entries.length,
                      entryTemplate = Handlebars.compile($('.tpl-entry').html());
