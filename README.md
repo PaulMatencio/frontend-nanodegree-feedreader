@@ -11,13 +11,18 @@ In this project you are given a web-based application that reads RSS feeds. The 
 
 * When a new feed is selected, the application use Google feed API, Jquery and  Ajax to  asynchronously loaded the feed and update the DOM in order to display the articles of the feed. Every article of the feed should contains a title and an url
 
-* When the user clic on an article, the application use the url of the artickle to fecth the article and display it.
+* When the user click on an article, the application use the url of the artickle to fecth the article and display it.
 
 # TODO LIST
 
-* add a new feed to the feeds array [addFeed()]. The test of its completion is done: when the user type in the input text and click on the + button, the addFeed() function is called which cuurently add 1 to the number of available feeds. The implementation of the function addFeed() will be done later.
+* add a new feed  [addFeed()].  When the user type in the input text and click on the + button, the addFeed() function is called but do nothing right now. The implementation of the function addFeed() will be done later. The test of the addFeed() function compare the number of feeds after and before the function called and the difference should be +1. The test should fail  since no new feed is currently added
 
-* remove a feed from the feed array [ removeFeed()].  The test of its completion is done: when the user click on the X button of a feed, the removeFeed() function is triggered to reduce the number of available feeds by one. The implementation of the function removeFeed() will be done later.
+* delete a feed [ removeFeed()]. When the user click on the X button of a feed, the removeFeed() function is triggered to reduce the number of available feeds by one. The implementation of the function removeFeed() will be done later.  The test of the removeFeed() function compare the number of feeds before and after the function call and the difference whould be +1. The test should fail  since no feed has been actually removed
+
+# Working application
+
+http://paulmatencio.github.io/frontend-nanodegree-feedreader/
+
 
 # This project is to create test suites for testing our feed reader application
 
@@ -42,10 +47,9 @@ In this project you are given a web-based application that reads RSS feeds. The 
 
 * The fifth one is to test the specification of the findFeeds(). A query string and a callback should be supplied
 
-* Todo tests
-	* save feeds to localStorage
-	* add new feeds
-	* remove feeds
+
+** Test adding a  new feed. The  addFeed() function  is not actually implemented therefore the test should fail  **
+** Test deletet a feed. The  removeFeed() function is not actually implemented therefore the test should faii **
 
 # Resources and Tools that are used
 
