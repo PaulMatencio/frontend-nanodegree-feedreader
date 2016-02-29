@@ -21,7 +21,7 @@ In this project you are given a web-based application that reads RSS feeds. The 
 
 # Working application
 
-http://paulmatencio.github.io/frontend-nanodegree-feedreader/
+* http://paulmatencio.github.io/frontend-nanodegree-feedreader/
 
 
 # This project is to create test suites for testing our feed reader application
@@ -48,8 +48,9 @@ http://paulmatencio.github.io/frontend-nanodegree-feedreader/
 * The fifth one is to test the specification of the findFeeds(). A query string and a callback should be supplied
 
 
-** Test adding a  new feed. The  addFeed() function  is not actually implemented therefore the test should fail  **
-** Test deletet a feed. The  removeFeed() function is not actually implemented therefore the test should faii **
+* **Test adding a  new feed. The  addFeed() function  is not actually implemented therefore this test should fail **
+
+* ** Test deletet a feed. The  removeFeed() function is not actually implemented therefore this test should fail **
 
 # Resources and Tools that are used
 
