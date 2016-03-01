@@ -69,6 +69,14 @@ h2 {
     padding: 0;
     font-size: 1.6em;
     font-weight: bold;
+    border-radius: 50%;
+}
+
+.add-feed:hover {
+    text-shadow: 0 0 1px #000,
+                 0 0 10px rgba(199, 107, 107, 0.8);
+    -webkit-transform: scale(1.2);
+    transform: scale(1.2);
 }
 
 .slide-menu {
@@ -95,6 +103,12 @@ h2 {
     flex-wrap: wrap;
 }
 
+.slide-menu li:hover {
+    -webkit-transform: scale(1.1);
+    transform: scale(1.1);
+}
+
+
 .slide-menu li a {
     color: #fff;
     display: block;
@@ -107,11 +121,11 @@ h2 {
     position: relative;
     top: 0;
     right: 3px;
-    bottom: 0;
+    bottom: 1px;
     width: 20%;
     height: 36px;
     margin: 0;
-    font-size: 30px;
+    font-size: 25px;
     color: #cc9a9a;
     /* margin-bottom: 11px; */
     transition: color 0.2s ease-out;
@@ -119,13 +133,14 @@ h2 {
 
 .slide-menu li:hover .destroy {
     display: block;
+    border-radius: 50%;
 }
 
 .slide-menu li .destroy:hover {
     text-shadow: 0 0 1px #000,
                  0 0 10px rgba(199, 107, 107, 0.8);
-    -webkit-transform: scale(1.1);
-    transform: scale(1.1);
+    -webkit-transform: scale(1.2);
+    transform: scale(1.2);
 }
 
 .slide-menu  li .destroy:after {
